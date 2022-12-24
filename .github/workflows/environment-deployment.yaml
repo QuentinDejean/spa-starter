@@ -1,0 +1,27 @@
+name: 'Deploy SWFT frontend'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-codebase:
+    name: Check Codebase
+    uses: ./.github/workflows/check-codebase.yaml
+
+  deploy-dev:
+    needs: check-codebase
+    name: Development Deployment
+    uses: ./.github/workflows/build-deploy.yaml
+    with:
+      GITHUB_ENVIRONMENT: development
+      APP_SOME_API: SOME_API_ENDPOINT
+
+  deploy-prod:
+    needs: [check-codebase, deploy-dev]
+    name: Production Deployment
+    uses: ./.github/workflows/build-deploy.yaml
+    with:
+      GITHUB_ENVIRONMENT: production
+      APP_SOME_API: SOME_API_ENDPOINT

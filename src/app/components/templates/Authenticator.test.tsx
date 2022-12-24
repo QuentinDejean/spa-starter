@@ -29,7 +29,7 @@ describe('Authenticator', () => {
   it.skip('renders children components when the user logged in successfully', async () => {
     const { emailInput, passwordInput, submitButton } = setup()
 
-    fireEvent.change(emailInput, { target: { value: 'someone@woodside.com.au' } })
+    fireEvent.change(emailInput, { target: { value: 'someuser@gmail.com' } })
     fireEvent.change(passwordInput, { target: { value: 'someone-password' } })
 
     fireEvent.click(submitButton)

@@ -1,0 +1,41 @@
+name: Build and Deploy Application
+
+on:
+  workflow_call:
+    inputs:
+      GITHUB_ENVIRONMENT:
+        type: string
+        description: 'Github Environment'
+        required: true
+      APP_SOME_API:
+        type: string
+        description: 'Some API endpoint'
+        required: true
+
+jobs:
+  build-deploy-application:
+    name: Build and Deploy Application
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.GITHUB_ENVIRONMENT }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup node LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Package application
+        run: |
+          npm run build
+        env:
+          VITE_SOME_API: ${{ secrets.APP_SOME_API }}
+
+      - name: Deploy Application
+        run: echo "Deploying application to given environment"

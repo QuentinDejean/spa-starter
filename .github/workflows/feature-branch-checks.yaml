@@ -1,0 +1,10 @@
+name: 'Feature Branch Checks'
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-codebase:
+    uses: ./.github/workflows/check-codebase.yaml
