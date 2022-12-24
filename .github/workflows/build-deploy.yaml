@@ -18,11 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.GITHUB_ENVIRONMENT }}
 
-    # Required for AWS Credentials Configuration
-    permissions:
-      id-token: write
-      contents: write
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
