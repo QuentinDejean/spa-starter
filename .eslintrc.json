@@ -1,0 +1,44 @@
+{
+  "extends": ["airbnb", "airbnb-typescript", "plugin:react/jsx-runtime", "prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "browser": true
+  },
+  "ignorePatterns": ["vite.config.ts", "ci/", "dist/", "coverage/"],
+  "rules": {
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "pathGroups": [
+          {
+            "pattern": "@app/components/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@app/utils/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@test/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always"
+      }
+    ],
+    "react/require-default-props": "off"
+  }
+}
